@@ -1,0 +1,37 @@
+---
+title: "Census"
+author: "Angelo Morelli"
+format: html
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(tidycensus)
+options(tigris_use_cache = TRUE)
+```
+
+```{r}
+#| cache: TRUE
+
+fl_income <- get_acs(
+  geography = "tract", 
+  variables = "B19013_001",
+  state = "FL", 
+  year = 2020,
+  geometry = TRUE
+)
+
+fl_income
+```
+
+# Cool Plot
+
+```{r}
+plot(fl_income["estimate"])
+```
